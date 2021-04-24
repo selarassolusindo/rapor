@@ -40,7 +40,10 @@ class T00_siswa extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->load->view('t00_siswa/t00_siswa_list', $data);
+        // $this->load->view('t00_siswa/t00_siswa_list', $data);
+        $data['_view'] = 't00_siswa/t00_siswa_list';
+        $data['_caption'] = 'DATA SISWA';
+        $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
     public function read($id)
@@ -66,7 +69,10 @@ class T00_siswa extends CI_Controller
 			'idsiswa' => set_value('idsiswa'),
 			'Nama' => set_value('Nama'),
 		);
-        $this->load->view('t00_siswa/t00_siswa_form', $data);
+        // $this->load->view('t00_siswa/t00_siswa_form', $data);
+        $data['_view'] = 't00_siswa/t00_siswa_form';
+        $data['_caption'] = 'DATA SISWA';
+        $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
     public function create_action()
@@ -96,7 +102,10 @@ class T00_siswa extends CI_Controller
 				'idsiswa' => set_value('idsiswa', $row->idsiswa),
 				'Nama' => set_value('Nama', $row->Nama),
 			);
-            $this->load->view('t00_siswa/t00_siswa_form', $data);
+            // $this->load->view('t00_siswa/t00_siswa_form', $data);
+            $data['_view'] = 't00_siswa/t00_siswa_form';
+            $data['_caption'] = 'DATA SISWA';
+            $this->load->view('_00_dashboard/_00_dashboard_view', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t00_siswa'));

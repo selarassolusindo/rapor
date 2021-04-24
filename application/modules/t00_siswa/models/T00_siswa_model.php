@@ -8,7 +8,7 @@ class T00_siswa_model extends CI_Model
 
     public $table = 't00_siswa';
     public $id = 'idsiswa';
-    public $order = 'DESC';
+    public $order = 'ASC';
 
     function __construct()
     {

@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
@@ -10,7 +10,7 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T00_siswa List</h2>
+        <h2 style="margin-top:0px">T00_siswa List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('t00_siswa/create'),'Tambah', 'class="btn btn-primary"'); ?>
@@ -52,12 +52,12 @@
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $t00_siswa->Nama ?></td>
 				<td style="text-align:center" width="200px">
-				<?php 
-				//echo anchor(site_url('t00_siswa/read/'.$t00_siswa->idsiswa),'Read'); 
-				//echo ' | '; 
-				echo anchor(site_url('t00_siswa/update/'.$t00_siswa->idsiswa),'Ubah'); 
-				echo ' | '; 
-				echo anchor(site_url('t00_siswa/delete/'.$t00_siswa->idsiswa),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"'); 
+				<?php
+				//echo anchor(site_url('t00_siswa/read/'.$t00_siswa->idsiswa),'Read');
+				//echo ' | ';
+				echo anchor(site_url('t00_siswa/update/'.$t00_siswa->idsiswa),'Ubah');
+				echo ' | ';
+				echo anchor(site_url('t00_siswa/delete/'.$t00_siswa->idsiswa),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>
 				</td>
 			</tr>
@@ -73,5 +73,5 @@
                 <?php echo $pagination ?>
             </div>
         </div>
-    </body>
-</html>
+    <!-- </body>
+</html> -->

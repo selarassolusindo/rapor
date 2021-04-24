@@ -40,7 +40,10 @@ class T30_absensi extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        $this->load->view('t30_absensi/t30_absensi_list', $data);
+        // $this->load->view('t30_absensi/t30_absensi_list', $data);
+        $data['_view'] = 't30_absensi/t30_absensi_list';
+        $data['_caption'] = 'DATA ABSENSI';
+        $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
     public function read($id)
@@ -72,7 +75,10 @@ class T30_absensi extends CI_Controller
 			'I' => set_value('I'),
 			'A' => set_value('A'),
 		);
-        $this->load->view('t30_absensi/t30_absensi_form', $data);
+        // $this->load->view('t30_absensi/t30_absensi_form', $data);
+        $data['_view'] = 't30_absensi/t30_absensi_form';
+        $data['_caption'] = 'DATA ABSENSI';
+        $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
     public function create_action()
@@ -108,7 +114,10 @@ class T30_absensi extends CI_Controller
 				'I' => set_value('I', $row->I),
 				'A' => set_value('A', $row->A),
 			);
-            $this->load->view('t30_absensi/t30_absensi_form', $data);
+            // $this->load->view('t30_absensi/t30_absensi_form', $data);
+            $data['_view'] = 't30_absensi/t30_absensi_form';
+            $data['_caption'] = 'DATA ABSENSI';
+            $this->load->view('_00_dashboard/_00_dashboard_view', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t30_absensi'));
