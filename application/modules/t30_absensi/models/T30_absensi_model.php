@@ -8,7 +8,8 @@ class T30_absensi_model extends CI_Model
 
     public $table = 't30_absensi';
     public $id = 'idabsensi';
-    public $order = 'DESC';
+    public $order = 'ASC';
+    public $join = 't00_siswa';
 
     function __construct()
     {
@@ -19,37 +20,50 @@ class T30_absensi_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idsiswa = ' . $this->table . '.idsiswa', 'left');
+        return $this->db->get()->result();
     }
 
     // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idsiswa = ' . $this->table . '.idsiswa', 'left');
+        return $this->db->get()->row();
     }
 
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idabsensi', $q);
-		$this->db->or_like('idsiswa', $q);
+        $this->db->like($this->join . '.Nama', $q);
 		$this->db->or_like('S', $q);
 		$this->db->or_like('I', $q);
 		$this->db->or_like('A', $q);
-		$this->db->from($this->table);
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idsiswa = ' . $this->table . '.idsiswa', 'left');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idabsensi', $q);
-		$this->db->or_like('idsiswa', $q);
+        $this->db->like($this->join . '.Nama', $q);
 		$this->db->or_like('S', $q);
 		$this->db->or_like('I', $q);
 		$this->db->or_like('A', $q);
 		$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Nama');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idsiswa = ' . $this->table . '.idsiswa', 'left');
+        return $this->db->get()->result();
     }
 
     // insert data

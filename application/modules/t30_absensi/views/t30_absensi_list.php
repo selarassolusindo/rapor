@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
-        <link rel="stylesheet" href="<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
+        <link rel="stylesheet" href="<?php //echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>"/>
         <style>
             body{
                 padding: 15px;
@@ -13,7 +13,7 @@
         <h2 style="margin-top:0px">T30_absensi List</h2> -->
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('t30_absensi/create'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php //echo anchor(site_url('t30_absensi/create'),'Tambah', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -43,17 +43,17 @@
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
-                <th class="text-right">No.</th>
-				<th>Idsiswa</th>
+                <th class="text-right">NO.</th>
+				<th>NAMA</th>
 				<th>S</th>
 				<th>I</th>
 				<th>A</th>
-				<th class="text-center">Proses</th>
+				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($t30_absensi_data as $t30_absensi) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
-				<td><?php echo $t30_absensi->idsiswa ?></td>
+				<td><?php echo $t30_absensi->Nama ?></td>
 				<td><?php echo $t30_absensi->S ?></td>
 				<td><?php echo $t30_absensi->I ?></td>
 				<td><?php echo $t30_absensi->A ?></td>
@@ -62,8 +62,8 @@
 				//echo anchor(site_url('t30_absensi/read/'.$t30_absensi->idabsensi),'Read');
 				//echo ' | ';
 				echo anchor(site_url('t30_absensi/update/'.$t30_absensi->idabsensi),'Ubah');
-				echo ' | ';
-				echo anchor(site_url('t30_absensi/delete/'.$t30_absensi->idabsensi),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+				// echo ' | ';
+				// echo anchor(site_url('t30_absensi/delete/'.$t30_absensi->idabsensi),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
 				?>
 				</td>
 			</tr>
