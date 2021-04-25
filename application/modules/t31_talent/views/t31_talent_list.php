@@ -46,31 +46,34 @@
             <tr>
                 <th class="text-right">NO.</th>
 				<th>NAMA</th>
-				<!-- <th>TALENTNILAI</th> -->
-                <?php foreach ($t31_talent_data as $t31_talent) { ?>
                 <?php
-                $talentNilai = unserialize($t31_talent->TalentNilai);
-                foreach($talentNilai as $data) {
-                    ?>
-                    <th><?php echo $data['Talent'] ?></th>
-                    <?php
+                foreach ($t31_talent_data as $t31_talent) {
+                    if ($t31_talent->TalentNilai == "") {
+                        break;
+                    }
+                    $talentNilai = unserialize($t31_talent->TalentNilai);
+                    foreach($talentNilai as $data) {
+                        ?>
+                        <th><?php echo $data['Talent'] ?></th>
+                        <?php
+                    }
+                    break;
                 }
-                break;
                 ?>
-                <?php } ?>
 				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($t31_talent_data as $t31_talent) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $t31_talent->Nama ?></td>
-				<!-- <td><?php //echo $t31_talent->TalentNilai ?></td> -->
                 <?php
-                $talentNilai = unserialize($t31_talent->TalentNilai);
-                foreach($talentNilai as $data) {
-                    ?>
-                    <td><?php echo $data['Nilai'] ?></td>
-                    <?php
+                if ($t31_talent->TalentNilai != "") {
+                    $talentNilai = unserialize($t31_talent->TalentNilai);
+                    foreach($talentNilai as $data) {
+                        ?>
+                        <td><?php echo $data['Nilai'] ?></td>
+                        <?php
+                    }
                 }
                 ?>
 				<td style="text-align:center" width="200px">
