@@ -238,7 +238,7 @@
                                     <li class="nav-item
                                         <?php
                                         switch ($this->uri->segment(1)) {
-                                            case 't02_kelompokx':
+                                            case 't03_mapel':
                                                 echo 'menu-open';
                                                 break;
                                             default:
@@ -249,7 +249,7 @@
                                         <a href="#" class="nav-link
                                             <?php
                                             switch ($this->uri->segment(1)) {
-                                                case 't02_kelompokx':
+                                                case 't03_mapel':
                                                     echo 'active';
                                                     break;
                                                 default:
@@ -265,7 +265,7 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="<?php echo site_url() ?>t00_siswa" class="nav-link <?php echo $this->uri->segment(1) == 't00_siswa' ? 'active' : ''; ?>">
+                                                <a href="<?php echo site_url() ?>t03_mapel" class="nav-link <?php echo $this->uri->segment(1) == 't03_mapel' ? 'active' : ''; ?>">
                                                     <i class="far fa-dot-circle nav-icon"></i>
                                                     <p>MATA PELAJARAN</p>
                                                 </a>
