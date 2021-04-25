@@ -169,8 +169,8 @@ class T31_talent extends CI_Controller
 
     public function _rules()
     {
-		$this->form_validation->set_rules('idsiswa', 'idsiswa', 'trim|required');
-		$this->form_validation->set_rules('TalentNilai', 'talentnilai', 'trim|required');
+		// $this->form_validation->set_rules('idsiswa', 'idsiswa', 'trim|required');
+		// $this->form_validation->set_rules('TalentNilai', 'talentnilai', 'trim|required');
 		$this->form_validation->set_rules('idtalenttr', 'idtalenttr', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
