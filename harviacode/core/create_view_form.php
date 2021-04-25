@@ -12,7 +12,7 @@ $string = "<!doctype html>
         </style>
     </head>
     <body>
-        <h2 style=\"margin-top:0px\">".ucfirst($table_name)." <?php echo \$button ?></h2>
+        <h2 style=\"margin-top:0px\">".ucfirst($table_name)." <?php //echo \$button ?></h2>
         <form action=\"<?php echo \$action; ?>\" method=\"post\">";
 foreach ($non_pk as $row) {
     if ($row["data_type"] == 'text')

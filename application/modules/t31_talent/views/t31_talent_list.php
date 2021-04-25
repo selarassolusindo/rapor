@@ -14,7 +14,7 @@
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php //echo anchor(site_url('t31_talent/create'),'Tambah', 'class="btn btn-primary"'); ?>
-                <?php echo anchor(site_url('t31_talent/sinkronisasi'),'Sinkronisasi', 'class="btn btn-primary"') ?>
+                <?php //echo anchor(site_url('t31_talent/sinkronisasi'),'Sinkronisasi', 'class="btn btn-primary"') ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -45,8 +45,8 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th class="text-right">NO.</th>
-				<th>IDSISWA</th>
-				<th>TALENTNILAI</th>
+				<th>NAMA</th>
+				<!-- <th>TALENTNILAI</th> -->
                 <?php foreach ($t31_talent_data as $t31_talent) { ?>
                 <?php
                 $talentNilai = unserialize($t31_talent->TalentNilai);
@@ -63,8 +63,8 @@
 			<?php foreach ($t31_talent_data as $t31_talent) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
-				<td><?php echo $t31_talent->idsiswa ?></td>
-				<td><?php echo $t31_talent->TalentNilai ?></td>
+				<td><?php echo $t31_talent->Nama ?></td>
+				<!-- <td><?php //echo $t31_talent->TalentNilai ?></td> -->
                 <?php
                 $talentNilai = unserialize($t31_talent->TalentNilai);
                 foreach($talentNilai as $data) {

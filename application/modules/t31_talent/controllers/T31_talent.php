@@ -107,6 +107,8 @@ class T31_talent extends CI_Controller
 				'idtalenttr' => set_value('idtalenttr', $row->idtalenttr),
 				'idsiswa' => set_value('idsiswa', $row->idsiswa),
 				'TalentNilai' => set_value('TalentNilai', $row->TalentNilai),
+                'Nama' => $row->Nama,
+                'row' => $row,
 			);
             // $this->load->view('t31_talent/t31_talent_form', $data);
             $data['_view'] = 't31_talent/t31_talent_form';
@@ -125,9 +127,25 @@ class T31_talent extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('idtalenttr', TRUE));
         } else {
+
+            /**
+             * baca data dari form
+             */
+            $data = $this->input->post();
+
+            /**
+             * ambil data talent dan nilai
+             */
+            foreach($data['talent'] as $key => $value) {
+                $talentNilai[] = [
+                    'Talent' => $value,
+                    'Nilai' => $data['nilai'][$key],
+                ];
+            }
+
             $data = array(
-				'idsiswa' => $this->input->post('idsiswa',TRUE),
-				'TalentNilai' => $this->input->post('TalentNilai',TRUE),
+				// 'idsiswa' => $this->input->post('idsiswa',TRUE),
+				'TalentNilai' => serialize($talentNilai),
 			);
             $this->T31_talent_model->update($this->input->post('idtalenttr', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -239,10 +257,58 @@ class T31_talent extends CI_Controller
                 ];
                 $this->T31_talent_model->update($data->idtalenttr, $dataUpdate);
             } else { // jika data talent-nilai sudah terisi
+                /**
+                 * ambil data talent-nilai, ditempatkan di array
+                 */
+                $dataTalentNilai = unserialize($data->TalentNilai);
+                // echo pre($dataTalentNilai);
+
+                /**
+                 * looping data setup talent
+                 */
+                foreach ($dataSetupTalent as $dataSetupTalentObj) {
+                    /**
+                     * ambil nilai Talent
+                     */
+                    $talent = $dataSetupTalentObj->Talent;
+
+                    /**
+                     * data talent dicari di array data talent-nilai
+                     */
+                    $key = array_search($talent, array_column($dataTalentNilai, 'Talent'), true);
+
+                    /**
+                     * jika data setup talent ditemukan pada talent-nilai, maka nilai akan disimpan
+                     * jika data setup talent tidak ditemukan pada talent-nilai, maka nilai dikosongi
+                     */
+                    $nilai = (FALSE !== $key) ? $dataTalentNilai[$key]['Nilai'] : "";
+
+                    /**
+                     * buat talent-nilai baru berdasarkan ::
+                     * data talent dari setup talent
+                     * nilai talent diambil dari data talent-nilai jika ada
+                     */
+                    $dataTalentNilaiBaru[] = [
+                        'Talent' => $dataSetupTalentObj->Talent,
+                        'Nilai' => $nilai,
+                    ];
+                }
+
+                /**
+                 * update data di tabel talent's day
+                 */
+                $dataUpdate = [
+                    'TalentNilai' => serialize($dataTalentNilaiBaru),
+                ];
+                $this->T31_talent_model->update($data->idtalenttr, $dataUpdate);
 
             }
 
         }
+
+        $this->session->set_flashdata('message', 'Sinkronisasi Data Selesai');
+        redirect(site_url('t31_talent'));
+
     }
 
 }
