@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2021 at 05:28 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.15
+-- Generation Time: Apr 25, 2021 at 11:15 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -117,7 +117,7 @@ CREATE TABLE `t31_talent` (
 --
 
 INSERT INTO `t31_talent` (`idtalenttr`, `idsiswa`, `TalentNilai`) VALUES
-(1, 4, '');
+(1, 4, 'a:4:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}}');
 
 --
 -- Indexes for dumped tables
