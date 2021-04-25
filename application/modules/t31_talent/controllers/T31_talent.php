@@ -219,15 +219,14 @@ class T31_talent extends CI_Controller
          * looping semua data talent's day untuk disempurnakan data talent-nilai nya
          */
         foreach($dataTalentDay as $data) {
-            if ($data->TalentNilai == "") {
-                // jika data talent-nilai masih kosong
 
+            if ($data->TalentNilai == "") { // jika data talent-nilai masih kosong
                 /**
                  * looping data setup talent
                  */
-                foreach ($dataSetupTalent as $dataSetupTalentArray) {
+                foreach ($dataSetupTalent as $dataSetupTalentObj) {
                     $dataTalentNilai[] = [
-                        'Talent' => $dataSetupTalentArray['Talent'],
+                        'Talent' => $dataSetupTalentObj->Talent,
                         'Nilai' => '',
                     ];
                 }
@@ -239,9 +238,9 @@ class T31_talent extends CI_Controller
                     'TalentNilai' => serialize($dataTalentNilai),
                 ];
                 $this->T31_talent_model->update($data->idtalenttr, $dataUpdate);
-            }
+            } else { // jika data talent-nilai sudah terisi
 
-            // $talentNilai = unserialize($data->TalentNilai);
+            }
 
         }
     }

@@ -47,6 +47,17 @@
                 <th class="text-right">NO.</th>
 				<th>IDSISWA</th>
 				<th>TALENTNILAI</th>
+                <?php foreach ($t31_talent_data as $t31_talent) { ?>
+                <?php
+                $talentNilai = unserialize($t31_talent->TalentNilai);
+                foreach($talentNilai as $data) {
+                    ?>
+                    <th><?php echo $data['Talent'] ?></th>
+                    <?php
+                }
+                break;
+                ?>
+                <?php } ?>
 				<th class="text-center">PROSES</th>
             </tr>
 			<?php foreach ($t31_talent_data as $t31_talent) { ?>
@@ -54,6 +65,14 @@
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $t31_talent->idsiswa ?></td>
 				<td><?php echo $t31_talent->TalentNilai ?></td>
+                <?php
+                $talentNilai = unserialize($t31_talent->TalentNilai);
+                foreach($talentNilai as $data) {
+                    ?>
+                    <td><?php echo $data['Nilai'] ?></td>
+                    <?php
+                }
+                ?>
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('t31_talent/read/'.$t31_talent->idtalenttr),'Read');
