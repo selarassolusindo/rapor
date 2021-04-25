@@ -42,7 +42,7 @@ class T01_talent extends CI_Controller
         );
         // $this->load->view('t01_talent/t01_talent_list', $data);
         $data['_view'] = 't01_talent/t01_talent_list';
-        $data['_caption'] = 'Data Talent';
+        $data['_caption'] = 'DATA TALENT';
         $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
@@ -71,7 +71,7 @@ class T01_talent extends CI_Controller
 		);
         // $this->load->view('t01_talent/t01_talent_form', $data);
         $data['_view'] = 't01_talent/t01_talent_form';
-        $data['_caption'] = 'Data Talent';
+        $data['_caption'] = 'DATA TALENT';
         $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
@@ -104,7 +104,7 @@ class T01_talent extends CI_Controller
 			);
             // $this->load->view('t01_talent/t01_talent_form', $data);
             $data['_view'] = 't01_talent/t01_talent_form';
-            $data['_caption'] = 'Data Talent';
+            $data['_caption'] = 'DATA TALENT';
             $this->load->view('_00_dashboard/_00_dashboard_view', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
