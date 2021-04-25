@@ -212,6 +212,12 @@ class T01_talent extends CI_Controller
          */
         foreach($dataTalentDay as $data) {
 
+            /**
+             * array dikosongi
+             */
+            $dataTalentNilai = array();
+            $dataTalentNilaiBaru = array();
+
             if ($data->TalentNilai == "") { // jika data talent-nilai masih kosong
                 /**
                  * looping data setup talent
@@ -230,6 +236,8 @@ class T01_talent extends CI_Controller
                     'TalentNilai' => serialize($dataTalentNilai),
                 ];
                 $this->T31_talent_model->update($data->idtalenttr, $dataUpdate);
+                // echo pre($dataUpdate);
+
             } else { // jika data talent-nilai sudah terisi
                 /**
                  * ambil data talent-nilai, ditempatkan di array
@@ -279,7 +287,7 @@ class T01_talent extends CI_Controller
             }
 
         }
-
+        // exit;
         $this->session->set_flashdata('message', 'Sinkronisasi Data Selesai');
         redirect(site_url('t01_talent'));
 
