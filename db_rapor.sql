@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2021 at 11:15 AM
+-- Generation Time: Apr 25, 2021 at 08:31 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -74,7 +74,8 @@ INSERT INTO `t01_talent` (`idtalent`, `Talent`) VALUES
 (1, 'PRAMUKA'),
 (2, 'TARI'),
 (3, 'MEWARNA / TAHFIDZ'),
-(4, 'PUBLIC SPEAKING');
+(4, 'PUBLIC SPEAKING'),
+(5, 'TILAWATIL');
 
 -- --------------------------------------------------------
 
@@ -95,8 +96,8 @@ CREATE TABLE `t30_absensi` (
 --
 
 INSERT INTO `t30_absensi` (`idabsensi`, `idsiswa`, `S`, `I`, `A`) VALUES
-(1, 1, 1, 0, 0),
-(2, 2, 0, 2, 0),
+(1, 1, 0, 0, 0),
+(2, 2, 0, 0, 0),
 (3, 3, 0, 0, 0),
 (4, 4, 0, 0, 0);
 
@@ -117,7 +118,10 @@ CREATE TABLE `t31_talent` (
 --
 
 INSERT INTO `t31_talent` (`idtalenttr`, `idsiswa`, `TalentNilai`) VALUES
-(1, 4, 'a:4:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}}');
+(1, 1, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}'),
+(2, 2, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}'),
+(3, 3, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}'),
+(4, 4, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}');
 
 --
 -- Indexes for dumped tables
@@ -163,7 +167,7 @@ ALTER TABLE `t00_siswa`
 -- AUTO_INCREMENT for table `t01_talent`
 --
 ALTER TABLE `t01_talent`
-  MODIFY `idtalent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idtalent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `t30_absensi`
@@ -175,7 +179,7 @@ ALTER TABLE `t30_absensi`
 -- AUTO_INCREMENT for table `t31_talent`
 --
 ALTER TABLE `t31_talent`
-  MODIFY `idtalenttr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idtalenttr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
