@@ -10,7 +10,7 @@ class " . $m . " extends CI_Model
 
     public \$table = '$table_name';
     public \$id = '$pk';
-    public \$order = 'DESC';
+    public \$order = 'ASC';
 
     function __construct()
     {

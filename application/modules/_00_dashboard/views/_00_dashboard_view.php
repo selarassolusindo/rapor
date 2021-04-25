@@ -190,12 +190,53 @@
                                 </a>
                             </li>
 
+                            <!-- setup -->
+                            <li class="nav-item
+                                <?php
+                                switch ($this->uri->segment(1)) {
+                                    case 't01_talent':
+                                        echo 'menu-open';
+                                        break;
+                                    default:
+                                        echo '';
+                                }
+                                ?>
+                            ">
+                                <a href="#" class="nav-link
+                                    <?php
+                                    switch ($this->uri->segment(1)) {
+                                        case 't01_talent':
+                                            echo 'active';
+                                            break;
+                                        default:
+                                            echo '';
+                                    }
+                                    ?>
+                                ">
+                                    <i class="nav-icon fas fa-circle"></i>
+                                    <p>
+                                    SETUP
+                                    <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url() ?>t01_talent" class="nav-link <?php echo $this->uri->segment(1) == 't01_talent' ? 'active' : ''; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>TALENT</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- ./setup -->
+
                             <!-- input data -->
                             <li class="nav-item
                                 <?php
                                 switch ($this->uri->segment(1)) {
                                     case 't00_siswa':
                                     case 't30_absensi':
+                                    case 't31_talent':
                                         echo 'menu-open';
                                         break;
                                     default:
@@ -208,6 +249,7 @@
                                     switch ($this->uri->segment(1)) {
                                         case 't00_siswa':
                                         case 't30_absensi':
+                                        case 't31_talent':
                                             echo 'active';
                                             break;
                                         default:
@@ -227,6 +269,7 @@
                                         switch ($this->uri->segment(1)) {
                                             case 't00_siswa':
                                             case 't30_absensi':
+                                            case 't31_talent':
                                                 echo 'menu-open';
                                                 break;
                                             default:
@@ -239,6 +282,7 @@
                                             switch ($this->uri->segment(1)) {
                                                 case 't00_siswa':
                                                 case 't30_absensi':
+                                                case 't31_talent':
                                                     echo 'active';
                                                     break;
                                                 default:
@@ -263,6 +307,12 @@
                                                 <a href="<?php echo site_url() ?>t30_absensi" class="nav-link <?php echo $this->uri->segment(1) == 't30_absensi' ? 'active' : ''; ?>">
                                                     <i class="far fa-dot-circle nav-icon"></i>
                                                     <p>PERKEMBANGAN SISWA</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="<?php echo site_url() ?>t31_talent" class="nav-link <?php echo $this->uri->segment(1) == 't31_talent' ? 'active' : ''; ?>">
+                                                    <i class="far fa-dot-circle nav-icon"></i>
+                                                    <p>TALENT'S DAY</p>
                                                 </a>
                                             </li>
                                         </ul>

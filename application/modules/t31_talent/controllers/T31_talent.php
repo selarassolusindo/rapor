@@ -3,12 +3,12 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class T30_absensi extends CI_Controller
+class T31_talent extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
-        $this->load->model('T30_absensi_model');
+        $this->load->model('T31_talent_model');
         $this->load->library('form_validation');
     }
 
@@ -18,49 +18,47 @@ class T30_absensi extends CI_Controller
         $start = intval($this->input->get('start'));
 
         if ($q <> '') {
-            $config['base_url'] = base_url() . 't30_absensi?q=' . urlencode($q);
-            $config['first_url'] = base_url() . 't30_absensi?q=' . urlencode($q);
+            $config['base_url'] = base_url() . 't31_talent?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 't31_talent?q=' . urlencode($q);
         } else {
-            $config['base_url'] = base_url() . 't30_absensi';
-            $config['first_url'] = base_url() . 't30_absensi';
+            $config['base_url'] = base_url() . 't31_talent';
+            $config['first_url'] = base_url() . 't31_talent';
         }
 
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
-        $config['total_rows'] = $this->T30_absensi_model->total_rows($q);
-        $t30_absensi = $this->T30_absensi_model->get_limit_data($config['per_page'], $start, $q);
+        $config['total_rows'] = $this->T31_talent_model->total_rows($q);
+        $t31_talent = $this->T31_talent_model->get_limit_data($config['per_page'], $start, $q);
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
         $data = array(
-            't30_absensi_data' => $t30_absensi,
+            't31_talent_data' => $t31_talent,
             'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        // $this->load->view('t30_absensi/t30_absensi_list', $data);
-        $data['_view'] = 't30_absensi/t30_absensi_list';
-        $data['_caption'] = 'DATA ABSENSI';
+        // $this->load->view('t31_talent/t31_talent_list', $data);
+        $data['_view'] = 't31_talent/t31_talent_list';
+        $data['_caption'] = 'Data Talent\'s Day';
         $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
     public function read($id)
     {
-        $row = $this->T30_absensi_model->get_by_id($id);
+        $row = $this->T31_talent_model->get_by_id($id);
         if ($row) {
             $data = array(
-				'idabsensi' => $row->idabsensi,
+				'idtalenttr' => $row->idtalenttr,
 				'idsiswa' => $row->idsiswa,
-				'S' => $row->S,
-				'I' => $row->I,
-				'A' => $row->A,
+				'TalentNilai' => $row->TalentNilai,
 			);
-            $this->load->view('t30_absensi/t30_absensi_read', $data);
+            $this->load->view('t31_talent/t31_talent_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('t30_absensi'));
+            redirect(site_url('t31_talent'));
         }
     }
 
@@ -68,16 +66,14 @@ class T30_absensi extends CI_Controller
     {
         $data = array(
             'button' => 'Simpan',
-            'action' => site_url('t30_absensi/create_action'),
-			'idabsensi' => set_value('idabsensi'),
+            'action' => site_url('t31_talent/create_action'),
+			'idtalenttr' => set_value('idtalenttr'),
 			'idsiswa' => set_value('idsiswa'),
-			'S' => set_value('S'),
-			'I' => set_value('I'),
-			'A' => set_value('A'),
+			'TalentNilai' => set_value('TalentNilai'),
 		);
-        // $this->load->view('t30_absensi/t30_absensi_form', $data);
-        $data['_view'] = 't30_absensi/t30_absensi_form';
-        $data['_caption'] = 'DATA ABSENSI';
+        // $this->load->view('t31_talent/t31_talent_form', $data);
+        $data['_view'] = 't31_talent/t31_talent_form';
+        $data['_caption'] = 'Data Talent\'s Day';
         $this->load->view('_00_dashboard/_00_dashboard_view', $data);
     }
 
@@ -90,38 +86,33 @@ class T30_absensi extends CI_Controller
         } else {
             $data = array(
 				'idsiswa' => $this->input->post('idsiswa',TRUE),
-				'S' => $this->input->post('S',TRUE),
-				'I' => $this->input->post('I',TRUE),
-				'A' => $this->input->post('A',TRUE),
+				'TalentNilai' => $this->input->post('TalentNilai',TRUE),
 			);
-            $this->T30_absensi_model->insert($data);
+            $this->T31_talent_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('t30_absensi'));
+            redirect(site_url('t31_talent'));
         }
     }
 
     public function update($id)
     {
-        $row = $this->T30_absensi_model->get_by_id($id);
+        $row = $this->T31_talent_model->get_by_id($id);
 
         if ($row) {
             $data = array(
                 'button' => 'Simpan',
-                'action' => site_url('t30_absensi/update_action'),
-				'idabsensi' => set_value('idabsensi', $row->idabsensi),
+                'action' => site_url('t31_talent/update_action'),
+				'idtalenttr' => set_value('idtalenttr', $row->idtalenttr),
 				'idsiswa' => set_value('idsiswa', $row->idsiswa),
-				'S' => set_value('S', $row->S),
-				'I' => set_value('I', $row->I),
-				'A' => set_value('A', $row->A),
-                'Nama' => $row->Nama,
+				'TalentNilai' => set_value('TalentNilai', $row->TalentNilai),
 			);
-            // $this->load->view('t30_absensi/t30_absensi_form', $data);
-            $data['_view'] = 't30_absensi/t30_absensi_form';
-            $data['_caption'] = 'DATA ABSENSI';
+            // $this->load->view('t31_talent/t31_talent_form', $data);
+            $data['_view'] = 't31_talent/t31_talent_form';
+            $data['_caption'] = 'Data Talent\'s Day';
             $this->load->view('_00_dashboard/_00_dashboard_view', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('t30_absensi'));
+            redirect(site_url('t31_talent'));
         }
     }
 
@@ -130,49 +121,45 @@ class T30_absensi extends CI_Controller
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->update($this->input->post('idabsensi', TRUE));
+            $this->update($this->input->post('idtalenttr', TRUE));
         } else {
             $data = array(
-				// 'idsiswa' => $this->input->post('idsiswa',TRUE),
-				'S' => $this->input->post('S',TRUE),
-				'I' => $this->input->post('I',TRUE),
-				'A' => $this->input->post('A',TRUE),
+				'idsiswa' => $this->input->post('idsiswa',TRUE),
+				'TalentNilai' => $this->input->post('TalentNilai',TRUE),
 			);
-            $this->T30_absensi_model->update($this->input->post('idabsensi', TRUE), $data);
+            $this->T31_talent_model->update($this->input->post('idtalenttr', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('t30_absensi'));
+            redirect(site_url('t31_talent'));
         }
     }
 
     public function delete($id)
     {
-        $row = $this->T30_absensi_model->get_by_id($id);
+        $row = $this->T31_talent_model->get_by_id($id);
 
         if ($row) {
-            $this->T30_absensi_model->delete($id);
+            $this->T31_talent_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('t30_absensi'));
+            redirect(site_url('t31_talent'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('t30_absensi'));
+            redirect(site_url('t31_talent'));
         }
     }
 
     public function _rules()
     {
-		// $this->form_validation->set_rules('idsiswa', 'idsiswa', 'trim|required');
-		$this->form_validation->set_rules('S', 's', 'trim|required');
-		$this->form_validation->set_rules('I', 'i', 'trim|required');
-		$this->form_validation->set_rules('A', 'a', 'trim|required');
-		$this->form_validation->set_rules('idabsensi', 'idabsensi', 'trim');
+		$this->form_validation->set_rules('idsiswa', 'idsiswa', 'trim|required');
+		$this->form_validation->set_rules('TalentNilai', 'talentnilai', 'trim|required');
+		$this->form_validation->set_rules('idtalenttr', 'idtalenttr', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
     public function excel()
     {
         $this->load->helper('exportexcel');
-        $namaFile = "t30_absensi.xls";
-        $judul = "t30_absensi";
+        $namaFile = "t31_talent.xls";
+        $judul = "t31_talent";
         $tablehead = 0;
         $tablebody = 1;
         $nourut = 1;
@@ -189,17 +176,13 @@ class T30_absensi extends CI_Controller
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
 		xlsWriteLabel($tablehead, $kolomhead++, "Idsiswa");
-		xlsWriteLabel($tablehead, $kolomhead++, "S");
-		xlsWriteLabel($tablehead, $kolomhead++, "I");
-		xlsWriteLabel($tablehead, $kolomhead++, "A");
-		foreach ($this->T30_absensi_model->get_all() as $data) {
+		xlsWriteLabel($tablehead, $kolomhead++, "TalentNilai");
+		foreach ($this->T31_talent_model->get_all() as $data) {
             $kolombody = 0;
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
 			xlsWriteNumber($tablebody, $kolombody++, $data->idsiswa);
-			xlsWriteNumber($tablebody, $kolombody++, $data->S);
-			xlsWriteNumber($tablebody, $kolombody++, $data->I);
-			xlsWriteNumber($tablebody, $kolombody++, $data->A);
+			xlsWriteLabel($tablebody, $kolombody++, $data->TalentNilai);
 			$tablebody++;
             $nourut++;
         }
@@ -210,18 +193,18 @@ class T30_absensi extends CI_Controller
     public function word()
     {
         header("Content-type: application/vnd.ms-word");
-        header("Content-Disposition: attachment;Filename=t30_absensi.doc");
+        header("Content-Disposition: attachment;Filename=t31_talent.doc");
         $data = array(
-            't30_absensi_data' => $this->T30_absensi_model->get_all(),
+            't31_talent_data' => $this->T31_talent_model->get_all(),
             'start' => 0
         );
-        $this->load->view('t30_absensi/t30_absensi_doc',$data);
+        $this->load->view('t31_talent/t31_talent_doc',$data);
     }
 
 }
 
-/* End of file T30_absensi.php */
-/* Location: ./application/controllers/T30_absensi.php */
+/* End of file T31_talent.php */
+/* Location: ./application/controllers/T31_talent.php */
 /* Please DO NOT modify this information : */
-/* Generated by Harviacode Codeigniter CRUD Generator 2021-04-24 23:08:52 */
+/* Generated by Harviacode Codeigniter CRUD Generator 2021-04-25 02:47:28 */
 /* http://harviacode.com */

@@ -13,8 +13,8 @@
         <h2 style="margin-top:0px">T30_absensi <?php echo $button ?></h2> -->
         <form action="<?php echo $action; ?>" method="post">
 			<div class="form-group">
-            	<label for="int">Idsiswa <?php echo form_error('idsiswa') ?></label>
-            	<input type="text" class="form-control" name="idsiswa" id="idsiswa" placeholder="Idsiswa" value="<?php echo $idsiswa; ?>" />
+            	<label for="int">NAMA <?php echo form_error('idsiswa') ?></label>
+            	<input type="text" class="form-control" name="" id="" placeholder="" value="<?php echo $Nama; ?>" readonly />
         	</div>
 			<div class="form-group">
             	<label for="int">S <?php echo form_error('S') ?></label>

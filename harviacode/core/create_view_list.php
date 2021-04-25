@@ -4,7 +4,7 @@ $string = "<!doctype html>
 <html>
     <head>
         <title>harviacode.com - codeigniter crud generator</title>
-        <link rel=\"stylesheet\" href=\"<?php echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>\"/>
+        <link rel=\"stylesheet\" href=\"<?php //echo base_url('assets/bootstrap/css/bootstrap.min.css') ?>\"/>
         <style>
             body{
                 padding: 15px;
@@ -45,11 +45,11 @@ $string = "<!doctype html>
         </div>
         <table class=\"table table-bordered\" style=\"margin-bottom: 10px\">
             <tr>
-                <th class=\"text-right\">No.</th>";
+                <th class=\"text-right\">NO.</th>";
 foreach ($non_pk as $row) {
-    $string .= "\n\t\t\t\t<th>" . label($row['column_name']) . "</th>";
+    $string .= "\n\t\t\t\t<th>" . label(strtoupper($row['column_name'])) . "</th>";
 }
-$string .= "\n\t\t\t\t<th class=\"text-center\">Proses</th>
+$string .= "\n\t\t\t\t<th class=\"text-center\">PROSES</th>
             </tr>";
 $string .= "\n\t\t\t<?php foreach ($" . $c_url . "_data as \$$c_url) { ?>
             <tr>";
