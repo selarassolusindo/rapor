@@ -10,6 +10,8 @@ class T31_talent extends CI_Controller
         parent::__construct();
         $this->load->model('T31_talent_model');
         $this->load->library('form_validation');
+
+        $this->load->model('t01_talent/T01_talent_model');
     }
 
     public function index()
@@ -199,6 +201,49 @@ class T31_talent extends CI_Controller
             'start' => 0
         );
         $this->load->view('t31_talent/t31_talent_doc',$data);
+    }
+
+    public function sinkronisasi()
+    {
+        /**
+         * ambil data setup talent
+         */
+        $dataSetupTalent = $this->T01_talent_model->get_all();
+
+        /**
+         * ambil data talent's day
+         */
+        $dataTalentDay = $this->T31_talent_model->get_all();
+
+        /**
+         * looping semua data talent's day untuk disempurnakan data talent-nilai nya
+         */
+        foreach($dataTalentDay as $data) {
+            if ($data->TalentNilai == "") {
+                // jika data talent-nilai masih kosong
+
+                /**
+                 * looping data setup talent
+                 */
+                foreach ($dataSetupTalent as $dataSetupTalentArray) {
+                    $dataTalentNilai[] = [
+                        'Talent' => $dataSetupTalentArray['Talent'],
+                        'Nilai' => '',
+                    ];
+                }
+
+                /**
+                 * update data di tabel talent's day
+                 */
+                $dataUpdate = [
+                    'TalentNilai' => serialize($dataTalentNilai),
+                ];
+                $this->T31_talent_model->update($data->idtalenttr, $dataUpdate);
+            }
+
+            // $talentNilai = unserialize($data->TalentNilai);
+
+        }
     }
 
 }
