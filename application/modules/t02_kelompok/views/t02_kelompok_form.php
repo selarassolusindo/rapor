@@ -10,15 +10,15 @@
         </style>
     </head>
     <body>
-        <h2 style="margin-top:0px">T00_siswa <?php echo $button ?></h2> -->
+        <h2 style="margin-top:0px">T02_kelompok <?php //echo $button ?></h2> -->
         <form action="<?php echo $action; ?>" method="post">
 			<div class="form-group">
-            	<label for="varchar">NAMA <?php echo form_error('Nama') ?></label>
-            	<input type="text" class="form-control" name="Nama" id="Nama" placeholder="NAMA" value="<?php echo $Nama; ?>" />
+            	<label for="varchar">KELOMPOK <?php echo form_error('Kelompok') ?></label>
+            	<input type="text" class="form-control" name="Kelompok" id="Kelompok" placeholder="KELOMPOK" value="<?php echo $Kelompok; ?>" />
         	</div>
-			<input type="hidden" name="idsiswa" value="<?php echo $idsiswa; ?>" />
+			<input type="hidden" name="idkelompok" value="<?php echo $idkelompok; ?>" />
 			<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
-			<a href="<?php echo site_url('t00_siswa') ?>" class="btn btn-secondary">Batal</a>
+			<a href="<?php echo site_url('t02_kelompok') ?>" class="btn btn-secondary">Batal</a>
 		</form>
     <!-- </body>
 </html> -->

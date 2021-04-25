@@ -17,10 +17,10 @@
             	<input type="hidden" class="form-control" name="idsiswa" id="idsiswa" placeholder="Idsiswa" value="<?php echo $idsiswa; ?>" />
                 <input type="text" class="form-control" name="" value="<?php echo $Nama ?>" readonly>
         	</div>
-			<div class="form-group">
-            	<label for="TalentNilai">TalentNilai <?php echo form_error('TalentNilai') ?></label>
+			<!-- <div class="form-group">
+            	<label for="TalentNilai">TalentNilai <?php //echo form_error('TalentNilai') ?></label>
             	<textarea class="form-control" rows="3" name="TalentNilai" id="TalentNilai" placeholder="TalentNilai"><?php echo $TalentNilai; ?></textarea>
-        	</div>
+        	</div> -->
             <?php
             $aTalentNilai = unserialize($row->TalentNilai);
             ?>

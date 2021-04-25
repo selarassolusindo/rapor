@@ -100,6 +100,7 @@
                                 <?php
                                 switch ($this->uri->segment(1)) {
                                     case 't01_talent':
+                                    case 't02_kelompok':
                                         echo 'menu-open';
                                         break;
                                     default:
@@ -111,6 +112,7 @@
                                     <?php
                                     switch ($this->uri->segment(1)) {
                                         case 't01_talent':
+                                        case 't02_kelompok':
                                             echo 'active';
                                             break;
                                         default:
@@ -129,6 +131,12 @@
                                         <a href="<?php echo site_url() ?>t01_talent" class="nav-link <?php echo $this->uri->segment(1) == 't01_talent' ? 'active' : ''; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>TALENT</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<?php echo site_url() ?>t02_kelompok" class="nav-link <?php echo $this->uri->segment(1) == 't02_kelompok' ? 'active' : ''; ?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>KELOMPOK <small>MATA PELAJARAN</small></p>
                                         </a>
                                     </li>
                                 </ul>
@@ -230,9 +238,7 @@
                                     <li class="nav-item
                                         <?php
                                         switch ($this->uri->segment(1)) {
-                                            case 't00_siswa':
-                                            case 't30_absensi':
-                                            case 't31_talent':
+                                            case 't02_kelompokx':
                                                 echo 'menu-open';
                                                 break;
                                             default:
@@ -243,9 +249,7 @@
                                         <a href="#" class="nav-link
                                             <?php
                                             switch ($this->uri->segment(1)) {
-                                                case 't00_siswa':
-                                                case 't30_absensi':
-                                                case 't31_talent':
+                                                case 't02_kelompokx':
                                                     echo 'active';
                                                     break;
                                                 default:
