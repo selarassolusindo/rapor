@@ -14,7 +14,16 @@
         <form action="<?php echo $action; ?>" method="post">
 			<div class="form-group">
             	<label for="int">KELOMPOK <?php echo form_error('idkelompok') ?></label>
-            	<input type="text" class="form-control" name="idkelompok" id="idkelompok" placeholder="KELOMPOK" value="<?php echo $idkelompok; ?>" />
+            	<!-- <input type="text" class="form-control" name="idkelompok" id="idkelompok" placeholder="KELOMPOK" value="<?php echo $idkelompok; ?>" /> -->
+                <select class="form-control" name="idkelompok">
+                    <?php
+                    foreach($dataKelompok as $d) {
+                        ?>
+                        <option value="<?php echo $d->idkelompok ?>" <?php echo $d->idkelompok == $idkelompok ? "selected" : "" ?>><?php echo $d->Kelompok ?></option>
+                        <?php
+                    }
+                    ?>
+                </select>
         	</div>
 			<div class="form-group">
             	<label for="varchar">MATA PELAJARAN <?php echo form_error('MataPelajaran') ?></label>

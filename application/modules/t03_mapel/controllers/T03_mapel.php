@@ -10,6 +10,7 @@ class T03_mapel extends CI_Controller
         parent::__construct();
         $this->load->model('T03_mapel_model');
         $this->load->library('form_validation');
+        $this->load->model('t02_kelompok/T02_kelompok_model');
     }
 
     public function index()
@@ -65,6 +66,7 @@ class T03_mapel extends CI_Controller
 
     public function create()
     {
+        $dataKelompok = $this->T02_kelompok_model->get_all();
         $data = array(
             'button' => 'Simpan',
             'action' => site_url('t03_mapel/create_action'),
@@ -72,6 +74,7 @@ class T03_mapel extends CI_Controller
 			'idkelompok' => set_value('idkelompok'),
 			'MataPelajaran' => set_value('MataPelajaran'),
 			'SKM' => set_value('SKM'),
+            'dataKelompok' => $dataKelompok,
 		);
         // $this->load->view('t03_mapel/t03_mapel_form', $data);
         $data['_view'] = 't03_mapel/t03_mapel_form';
@@ -102,6 +105,7 @@ class T03_mapel extends CI_Controller
         $row = $this->T03_mapel_model->get_by_id($id);
 
         if ($row) {
+            $dataKelompok = $this->T02_kelompok_model->get_all();
             $data = array(
                 'button' => 'Simpan',
                 'action' => site_url('t03_mapel/update_action'),
@@ -109,6 +113,7 @@ class T03_mapel extends CI_Controller
 				'idkelompok' => set_value('idkelompok', $row->idkelompok),
 				'MataPelajaran' => set_value('MataPelajaran', $row->MataPelajaran),
 				'SKM' => set_value('SKM', $row->SKM),
+                'dataKelompok' => $dataKelompok,
 			);
             // $this->load->view('t03_mapel/t03_mapel_form', $data);
             $data['_view'] = 't03_mapel/t03_mapel_form';

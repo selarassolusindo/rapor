@@ -9,6 +9,7 @@ class T03_mapel_model extends CI_Model
     public $table = 't03_mapel';
     public $id = 'idmapel';
     public $order = 'ASC';
+    public $join = 't02_kelompok';
 
     function __construct()
     {
@@ -19,35 +20,48 @@ class T03_mapel_model extends CI_Model
     function get_all()
     {
         $this->db->order_by($this->id, $this->order);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Kelompok');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idkelompok = ' . $this->table . '.idkelompok', 'left');
+        return $this->db->get()->result();
     }
 
     // get data by id
     function get_by_id($id)
     {
         $this->db->where($this->id, $id);
-        return $this->db->get($this->table)->row();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Kelompok');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idkelompok = ' . $this->table . '.idkelompok', 'left');
+        return $this->db->get()->row();
     }
 
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('idmapel', $q);
-		$this->db->or_like('idkelompok', $q);
+        $this->db->like($this->join . '.Kelompok', $q);
 		$this->db->or_like('MataPelajaran', $q);
 		$this->db->or_like('SKM', $q);
-		$this->db->from($this->table);
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Kelompok');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idkelompok = ' . $this->table . '.idkelompok', 'left');
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
     function get_limit_data($limit, $start = 0, $q = NULL) {
         $this->db->order_by($this->id, $this->order);
-        $this->db->like('idmapel', $q);
-		$this->db->or_like('idkelompok', $q);
+        $this->db->like($this->join . '.Kelompok', $q);
 		$this->db->or_like('MataPelajaran', $q);
 		$this->db->or_like('SKM', $q);
 		$this->db->limit($limit, $start);
-        return $this->db->get($this->table)->result();
+        $this->db->select($this->table.'.*');
+        $this->db->select($this->join.'.Kelompok');
+        $this->db->from($this->table);
+        $this->db->join($this->join, $this->join . '.idkelompok = ' . $this->table . '.idkelompok', 'left');
+        return $this->db->get()->result();
     }
 
     // insert data

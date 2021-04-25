@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2021 at 08:31 PM
+-- Generation Time: Apr 25, 2021 at 10:33 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -48,8 +48,8 @@ INSERT INTO `t00_siswa` (`idsiswa`, `Nama`) VALUES
 DELIMITER $$
 CREATE TRIGGER `auto_insert_idsiswa` AFTER INSERT ON `t00_siswa` FOR EACH ROW BEGIN
 
-   insert into t30_absensi (idsiswa) values (new.idsiswa);
-   insert into t31_talent (idsiswa) values (new.idsiswa);
+insert into t30_absensi (idsiswa) values (new.idsiswa);
+insert into t31_talent (idsiswa) values (new.idsiswa);
 
 END
 $$
@@ -74,8 +74,62 @@ INSERT INTO `t01_talent` (`idtalent`, `Talent`) VALUES
 (1, 'PRAMUKA'),
 (2, 'TARI'),
 (3, 'MEWARNA / TAHFIDZ'),
-(4, 'PUBLIC SPEAKING'),
-(5, 'TILAWATIL');
+(4, 'PUBLIC SPEAKING');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t02_kelompok`
+--
+
+CREATE TABLE `t02_kelompok` (
+  `idkelompok` int(11) NOT NULL,
+  `Kelompok` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t02_kelompok`
+--
+
+INSERT INTO `t02_kelompok` (`idkelompok`, `Kelompok`) VALUES
+(1, 'PAI'),
+(2, 'UMUM'),
+(3, 'MULOK');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `t03_mapel`
+--
+
+CREATE TABLE `t03_mapel` (
+  `idmapel` int(11) NOT NULL,
+  `idkelompok` int(11) NOT NULL,
+  `MataPelajaran` varchar(50) NOT NULL,
+  `SKM` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t03_mapel`
+--
+
+INSERT INTO `t03_mapel` (`idmapel`, `idkelompok`, `MataPelajaran`, `SKM`) VALUES
+(1, 1, 'Al Qur\'an Hadist', 'B+'),
+(2, 1, 'Aqidah Akhlak', 'B+'),
+(3, 1, 'Fiqih', 'B+'),
+(4, 1, 'SKI', 'B+'),
+(5, 2, 'Pendidikan Kewarganegaraan', 'B+'),
+(6, 2, 'Bahasa Indonesia', 'B+'),
+(7, 2, 'Bahasa Arab', 'B+'),
+(8, 2, 'Matematika', 'B+'),
+(9, 2, 'IPA', 'B+'),
+(10, 2, 'IPS', 'B+'),
+(11, 2, 'SBK', 'B+'),
+(12, 2, 'Pendidikan Jasmani & Kesehatan', 'B+'),
+(13, 3, 'Bahasa Jawa', 'B+'),
+(14, 3, 'Bahasa Inggris', 'B+'),
+(15, 3, 'TIK', 'B+'),
+(16, 3, 'Aswaja', 'B+');
 
 -- --------------------------------------------------------
 
@@ -118,10 +172,10 @@ CREATE TABLE `t31_talent` (
 --
 
 INSERT INTO `t31_talent` (`idtalenttr`, `idsiswa`, `TalentNilai`) VALUES
-(1, 1, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}'),
-(2, 2, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}'),
-(3, 3, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}'),
-(4, 4, 'a:5:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}i:4;a:2:{s:6:\"Talent\";s:9:\"TILAWATIL\";s:5:\"Nilai\";s:0:\"\";}}');
+(1, 1, 'a:4:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}}'),
+(2, 2, 'a:4:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}}'),
+(3, 3, 'a:4:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}}'),
+(4, 4, 'a:4:{i:0;a:2:{s:6:\"Talent\";s:7:\"PRAMUKA\";s:5:\"Nilai\";s:0:\"\";}i:1;a:2:{s:6:\"Talent\";s:4:\"TARI\";s:5:\"Nilai\";s:0:\"\";}i:2;a:2:{s:6:\"Talent\";s:17:\"MEWARNA / TAHFIDZ\";s:5:\"Nilai\";s:0:\"\";}i:3;a:2:{s:6:\"Talent\";s:15:\"PUBLIC SPEAKING\";s:5:\"Nilai\";s:0:\"\";}}');
 
 --
 -- Indexes for dumped tables
@@ -138,6 +192,18 @@ ALTER TABLE `t00_siswa`
 --
 ALTER TABLE `t01_talent`
   ADD PRIMARY KEY (`idtalent`);
+
+--
+-- Indexes for table `t02_kelompok`
+--
+ALTER TABLE `t02_kelompok`
+  ADD PRIMARY KEY (`idkelompok`);
+
+--
+-- Indexes for table `t03_mapel`
+--
+ALTER TABLE `t03_mapel`
+  ADD PRIMARY KEY (`idmapel`);
 
 --
 -- Indexes for table `t30_absensi`
@@ -168,6 +234,18 @@ ALTER TABLE `t00_siswa`
 --
 ALTER TABLE `t01_talent`
   MODIFY `idtalent` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `t02_kelompok`
+--
+ALTER TABLE `t02_kelompok`
+  MODIFY `idkelompok` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `t03_mapel`
+--
+ALTER TABLE `t03_mapel`
+  MODIFY `idmapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `t30_absensi`

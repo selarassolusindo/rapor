@@ -52,7 +52,7 @@
 			<?php foreach ($t03_mapel_data as $t03_mapel) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
-				<td><?php echo $t03_mapel->idkelompok ?></td>
+				<td><?php echo $t03_mapel->Kelompok ?></td>
 				<td><?php echo $t03_mapel->MataPelajaran ?></td>
 				<td><?php echo $t03_mapel->SKM ?></td>
 				<td style="text-align:center" width="200px">
