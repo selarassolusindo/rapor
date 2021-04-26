@@ -329,3 +329,17 @@ function dateAdd($value, $add)
     date_add($date, date_interval_create_from_date_string($add . " days"));
     return date_format($date,"Y-m-d");
 }
+
+/**
+ * fungsi untuk mengubah posisi NAMA AKUN, disesuaikan dengan level akunnya
+ */
+function formatNama($data)
+{
+    if (substr($data->induk, -2) == '0') { // head
+        $result = '<b>' . $data->Kdasar . '</b>';
+    } else {
+        $result = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . $data->Kdasar . '';
+    }
+
+    return $result;
+}
