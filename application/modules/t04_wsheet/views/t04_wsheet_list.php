@@ -14,6 +14,7 @@
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php echo anchor(site_url('t04_wsheet/create'),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('t04_wsheet/sinkronisasi'),'Sinkronisasi', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -45,6 +46,7 @@
             <?php
             $recordPertama = 1;
             $cetakHeader = 0;
+            $header = $t04_wsheet_data;
             foreach ($t04_wsheet_data as $t04_wsheet) {
                 if ($recordPertama == 1) {
                     // $tripNo = $t30_tamu->TripNo;
@@ -72,6 +74,20 @@
                     echo '   <tr>';
                     echo '		<th class="text-center">NO.</th>';
             		echo '		<th class="text-center">KOMPETENSI DASAR</th>';
+
+                    foreach ($header as $d) {
+                        if ($d->SiswaNilai == "") {
+                            break;
+                        }
+                        $SiswaNilai = unserialize($d->SiswaNilai);
+                        foreach($SiswaNilai as $data) {
+                            ?>
+                            <th><?php echo $data['Siswa'] ?></th>
+                            <?php
+                        }
+                        break;
+                    }
+
             		echo '		<th class="text-center">PROSES</th>';
                     echo '    </tr>';
                 }
@@ -79,6 +95,16 @@
                 <tr>
     				<td width="80px" class="text-right"><?php echo $t04_wsheet->induk == '0' ? $t04_wsheet->NoUrut : '' ?></td>
                     <td><?php echo formatNama($t04_wsheet) ?></td>
+                    <?php
+                    if ($t04_wsheet->SiswaNilai != "") {
+                        $SiswaNilai = unserialize($t04_wsheet->SiswaNilai);
+                        foreach($SiswaNilai as $data) {
+                            ?>
+                            <td><?php echo $data['Nilai'] ?></td>
+                            <?php
+                        }
+                    }
+                    ?>
     				<td style="text-align:center" width="200px">
     				<?php
                     if ($t04_wsheet->induk == '0') {

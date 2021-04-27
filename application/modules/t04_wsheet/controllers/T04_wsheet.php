@@ -11,6 +11,7 @@ class T04_wsheet extends CI_Controller
         $this->load->model('T04_wsheet_model');
         $this->load->library('form_validation');
         $this->load->model('t03_mapel/T03_mapel_model');
+        $this->load->model('t00_siswa/T00_siswa_model');
     }
 
     public function index()
@@ -384,6 +385,101 @@ class T04_wsheet extends CI_Controller
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t04_wsheet'));
         }
+    }
+
+    public function sinkronisasi() {
+        /**
+         * ambil data siswa
+         */
+        $siswa = $this->T00_siswa_model->get_all(); //echo pre($siswa);
+
+        /**
+         * ambil data worksheet
+         */
+        $wsheet = $this->T04_wsheet_model->get_all();
+
+        /**
+         * looping data worksheet
+         */
+        foreach($wsheet as $dw) {
+
+            /**
+             * array dikosongi
+             */
+            $SiswaNilai = array();
+            $SiswaNilaiBaru = array();
+
+            if ($dw->SiswaNilai == "") { // jika data talent-nilai masih kosong
+
+                /**
+                 * looping data siswa
+                 */
+                foreach ($siswa as $ds) {
+                    $SiswaNilai[] = [
+                        'Siswa' => $ds->Nama,
+                        'Nilai' => '',
+                    ];
+                }
+
+                /**
+                 * update data di tabel worksheet
+                 */
+                $dataSiswaNilai = [
+                    'SiswaNilai' => serialize($SiswaNilai),
+                ];
+                $this->T04_wsheet_model->update($dw->idwsheet, $dataSiswaNilai);
+
+            } else {
+
+                /**
+                 * ambil data siswa-nilai, ditempatkan di array
+                 */
+                $dataSiswaNilai = unserialize($dw->SiswaNilai); //echo pre($dataSiswaNilai);
+
+                /**
+                 * looping data siswa
+                 */
+                foreach ($siswa as $ds) {
+                    /**
+                     * ambil nama siswa
+                     */
+                    $nama = $ds->Nama; //echo $nama;
+
+                    /**
+                     * data nama siswa dicari di array data siswa-nilai
+                     */
+                    $key = array_search($nama, array_column($dataSiswaNilai, 'Siswa'), true);
+
+                    /**
+                     * jika data nama siswa ditemukan pada siswa-nilai, maka nilai akan disimpan
+                     * jika data nama siswa tidak ditemukan pada siswa-nilai, maka nilai dikosongi
+                     */
+                    $nilai = (FALSE !== $key) ? $dataSiswaNilai[$key]['Nilai'] : "";
+
+                    /**
+                     * buat siswa-nilai baru berdasarkan ::
+                     * data nama siswa dari tabel siswa
+                     * nilai talent diambil dari data siswa-nilai jika ada
+                     */
+                    $SiswaNilaiBaru[] = [
+                        'Siswa' => $ds->Nama,
+                        'Nilai' => $nilai,
+                    ];
+                }
+
+                /**
+                 * update data di tabel worksheet
+                 */
+                $data = [
+                    'SiswaNilai' => serialize($SiswaNilaiBaru),
+                ];
+                $this->T04_wsheet_model->update($dw->idwsheet, $data);
+
+            }
+        }
+
+        $this->session->set_flashdata('message', 'Sinkronisasi Data Selesai');
+        redirect(site_url('t04_wsheet'));
     }
 
 }
