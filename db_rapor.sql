@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 25, 2021 at 10:33 PM
+-- Generation Time: Apr 27, 2021 at 07:45 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -134,6 +134,31 @@ INSERT INTO `t03_mapel` (`idmapel`, `idkelompok`, `MataPelajaran`, `SKM`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `t04_wsheet`
+--
+
+CREATE TABLE `t04_wsheet` (
+  `idwsheet` int(11) NOT NULL,
+  `idmapel` int(11) NOT NULL,
+  `NoUrut` int(11) NOT NULL,
+  `Kdasar` text NOT NULL,
+  `induk` int(11) NOT NULL,
+  `urut` varchar(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `t04_wsheet`
+--
+
+INSERT INTO `t04_wsheet` (`idwsheet`, `idmapel`, `NoUrut`, `Kdasar`, `induk`, `urut`) VALUES
+(1, 1, 1, 'Mengetahui urutan ayat QS. al-Humazah (104), at-Takâtsur (102), dan az-Zalzalah (99)', 0, '010100'),
+(2, 1, 1, 'Mengetahui urutan surat al- humazah dengan baik dan benar', 1, '010101'),
+(3, 1, 2, 'Mengetahui urutan surat at-takatsur  dengan baik dan benar', 1, '010102'),
+(9, 1, 3, 'Mengetahui urutan surat al-zalzalah dengan baik dan benar', 1, '010103');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `t30_absensi`
 --
 
@@ -206,6 +231,12 @@ ALTER TABLE `t03_mapel`
   ADD PRIMARY KEY (`idmapel`);
 
 --
+-- Indexes for table `t04_wsheet`
+--
+ALTER TABLE `t04_wsheet`
+  ADD PRIMARY KEY (`idwsheet`);
+
+--
 -- Indexes for table `t30_absensi`
 --
 ALTER TABLE `t30_absensi`
@@ -246,6 +277,12 @@ ALTER TABLE `t02_kelompok`
 --
 ALTER TABLE `t03_mapel`
   MODIFY `idmapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `t04_wsheet`
+--
+ALTER TABLE `t04_wsheet`
+  MODIFY `idwsheet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `t30_absensi`

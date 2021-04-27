@@ -93,6 +93,15 @@ class T04_wsheet_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    /**
+     * ambil data sub kompetensi dasar (level terakhir) berdasarkan idwsheet
+     */
+    function getData($idwsheet)
+    {
+        $this->db->where('induk', $idwsheet);
+        return $this->db->get($this->table)->result();
+    }
+
 }
 
 /* End of file T04_wsheet_model.php */

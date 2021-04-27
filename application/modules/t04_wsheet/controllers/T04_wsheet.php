@@ -147,8 +147,37 @@ class T04_wsheet extends CI_Controller
 				'NoUrut' => $this->input->post('NoUrut',TRUE),
 				'Kdasar' => $this->input->post('Kdasar',TRUE),
 				'induk' => $this->input->post('induk',TRUE),
+                'urut' =>
+                    substr('00' . trim($this->input->post('idmapel',TRUE)), -2)
+                    . substr('00' . trim($this->input->post('NoUrut',TRUE)), -2)
+                    . '00',
 			);
             $this->T04_wsheet_model->update($this->input->post('idwsheet', TRUE), $data);
+
+            /**
+             * simpan kode urut baru
+             */
+            $urutBaru =
+                substr('00' . trim($this->input->post('idmapel',TRUE)), -2)
+                . substr('00' . trim($this->input->post('NoUrut',TRUE)), -2);
+
+            /**
+             * ambil data sub berdasarkan head
+             */
+            $dataSub = $this->T04_wsheet_model->getData($this->input->post('idwsheet', TRUE));
+
+            /**
+             * update sub-sub dengan kode urut baru, jika ada data
+             */
+            if ($dataSub) {
+                foreach($dataSub as $d) {
+                    $data = array(
+                        'urut' => $urutBaru . substr($d->urut, -2),
+                    );
+                    $this->T04_wsheet_model->update($d->idwsheet, $data);
+                }
+            }
+
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('t04_wsheet'));
         }
@@ -160,6 +189,21 @@ class T04_wsheet extends CI_Controller
 
         if ($row) {
             $this->T04_wsheet_model->delete($id);
+
+            /**
+             * ambil data sub berdasarkan head
+             */
+            $dataSub = $this->T04_wsheet_model->getData($id);
+
+            /**
+             * update sub-sub dengan kode urut baru, jika ada data
+             */
+            if ($dataSub) {
+                foreach($dataSub as $d) {
+                    $this->T04_wsheet_model->delete($d->idwsheet);
+                }
+            }
+
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('t04_wsheet'));
         } else {
@@ -228,24 +272,14 @@ class T04_wsheet extends CI_Controller
         $this->load->view('t04_wsheet/t04_wsheet_doc',$data);
     }
 
-    public function add($id)
+    public function createSub($id)
     {
         $row = $this->T04_wsheet_model->get_by_id($id);
 
         if ($row) {
-            // $data = array(
-            //     'button' => 'Simpan',
-            //     'action' => site_url('t04_wsheet/create_action'),
-    		// 	'idwsheet' => set_value('idwsheet'),
-    		// 	'idmapel' => set_value('idmapel'),
-    		// 	'NoUrut' => set_value('NoUrut'),
-    		// 	'Kdasar' => set_value('Kdasar'),
-    		// 	'induk' => set_value('induk'),
-            //     'dataMapel' => $dataMapel,
-    		// );
             $data = array(
                 'button' => 'Simpan',
-                'action' => site_url('t04_wsheet/add_action'),
+                'action' => site_url('t04_wsheet/createSub_action'),
 				'idwsheet' => set_value('idwsheet'),
 				'idmapel' => set_value('idmapel', $row->idmapel),
 				'NoUrutRO' => set_value('NoUrutRO', $row->NoUrut),
@@ -256,18 +290,18 @@ class T04_wsheet extends CI_Controller
                 'MataPelajaran' => $row->MataPelajaran,
 			);
             // $this->load->view('t04_wsheet/t04_wsheet_form', $data);
-            $data['_view'] = 't04_wsheet/t04_wsheet_add';
+            $data['_view'] = 't04_wsheet/t04_wsheet_form_sub';
             $data['_caption'] = 'DATA WORKSHEET';
             $this->load->view('_00_dashboard/_00_dashboard_view', $data);
         }
     }
 
-    public function add_action()
+    public function createSub_action()
     {
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create();
+            $this->createSub($this->input->post('induk',TRUE));
         } else {
             $data = array(
 				'idmapel' => $this->input->post('idmapel',TRUE),
@@ -281,6 +315,73 @@ class T04_wsheet extends CI_Controller
 			);
             $this->T04_wsheet_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
+            redirect(site_url('t04_wsheet'));
+        }
+    }
+
+    public function updateSub($id)
+    {
+        $row = $this->T04_wsheet_model->get_by_id($id);
+
+        if ($row) {
+
+            /**
+             * ambil data head
+             */
+            $dataHead = $this->T04_wsheet_model->get_by_id($row->induk);
+
+            $data = array(
+                'button' => 'Simpan',
+                'action' => site_url('t04_wsheet/updateSub_action'),
+				'idwsheet' => set_value('idwsheet', $row->idwsheet),
+				'idmapel' => set_value('idmapel', $row->idmapel),
+				'NoUrutRO' => set_value('NoUrutRO', $dataHead->NoUrut),
+				'KdasarRO' => set_value('KdasarRO', $dataHead->Kdasar),
+				'induk' => set_value('induk', $row->induk),
+                'NoUrut' => set_value('NoUrut', $row->NoUrut),
+    			'Kdasar' => set_value('Kdasar', $row->Kdasar),
+                'MataPelajaran' => $row->MataPelajaran,
+			);
+            // $this->load->view('t04_wsheet/t04_wsheet_form', $data);
+            $data['_view'] = 't04_wsheet/t04_wsheet_form_sub';
+            $data['_caption'] = 'DATA WORKSHEET';
+            $this->load->view('_00_dashboard/_00_dashboard_view', $data);
+        }
+    }
+
+    public function updateSub_action()
+    {
+        $this->_rules();
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->updateSub($this->input->post('idwsheet', TRUE));
+        } else {
+            $data = array(
+				'NoUrut' => $this->input->post('NoUrut',TRUE),
+				'Kdasar' => $this->input->post('Kdasar',TRUE),
+                'urut' =>
+                    substr('00' . trim($this->input->post('idmapel',TRUE)), -2)
+                    . substr('00' . trim($this->input->post('NoUrutRO',TRUE)), -2)
+                    . substr('00' . trim($this->input->post('NoUrut',TRUE)), -2),
+			);
+            $this->T04_wsheet_model->update($this->input->post('idwsheet', TRUE), $data);
+
+            $this->session->set_flashdata('message', 'Update Record Success');
+            redirect(site_url('t04_wsheet'));
+        }
+    }
+
+    public function deleteSub($id)
+    {
+        $row = $this->T04_wsheet_model->get_by_id($id);
+
+        if ($row) {
+            $this->T04_wsheet_model->delete($id);
+
+            $this->session->set_flashdata('message', 'Delete Record Success');
+            redirect(site_url('t04_wsheet'));
+        } else {
+            $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('t04_wsheet'));
         }
     }

@@ -82,12 +82,17 @@
     				<td style="text-align:center" width="200px">
     				<?php
                     if ($t04_wsheet->induk == '0') {
-                        echo anchor(site_url('t04_wsheet/add/'.$t04_wsheet->idwsheet),'Tambah');
+                        echo anchor(site_url('t04_wsheet/createSub/'.$t04_wsheet->idwsheet),'Tambah');
         				echo ' | ';
+                        echo anchor(site_url('t04_wsheet/update/'.$t04_wsheet->idwsheet),'Ubah');
+        				echo ' | ';
+                        echo anchor(site_url('t04_wsheet/delete/'.$t04_wsheet->idwsheet),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+                    } else {
+                        echo anchor(site_url('t04_wsheet/updateSub/'.$t04_wsheet->idwsheet),'Ubah');
+        				echo ' | ';
+                        echo anchor(site_url('t04_wsheet/deleteSub/'.$t04_wsheet->idwsheet),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
                     }
-    				echo anchor(site_url('t04_wsheet/update/'.$t04_wsheet->idwsheet),'Ubah');
-    				echo ' | ';
-    				echo anchor(site_url('t04_wsheet/delete/'.$t04_wsheet->idwsheet),'Hapus','onclick="javascript: return confirm(\'Are You Sure ?\')"');
+
     				?>
     				</td>
     			</tr>
