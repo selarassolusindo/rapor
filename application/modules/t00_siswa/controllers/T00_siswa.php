@@ -68,6 +68,7 @@ class T00_siswa extends CI_Controller
             'action' => site_url('t00_siswa/create_action'),
 			'idsiswa' => set_value('idsiswa'),
 			'Nama' => set_value('Nama'),
+            'Panggilan' => set_value('Panggilan'),
 		);
         // $this->load->view('t00_siswa/t00_siswa_form', $data);
         $data['_view'] = 't00_siswa/t00_siswa_form';
@@ -84,6 +85,7 @@ class T00_siswa extends CI_Controller
         } else {
             $data = array(
 				'Nama' => $this->input->post('Nama',TRUE),
+                'Panggilan' => $this->input->post('Panggilan',TRUE),
 			);
             $this->T00_siswa_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -101,6 +103,7 @@ class T00_siswa extends CI_Controller
                 'action' => site_url('t00_siswa/update_action'),
 				'idsiswa' => set_value('idsiswa', $row->idsiswa),
 				'Nama' => set_value('Nama', $row->Nama),
+                'Panggilan' => set_value('Nama', $row->Panggilan),
 			);
             // $this->load->view('t00_siswa/t00_siswa_form', $data);
             $data['_view'] = 't00_siswa/t00_siswa_form';
@@ -121,6 +124,7 @@ class T00_siswa extends CI_Controller
         } else {
             $data = array(
 				'Nama' => $this->input->post('Nama',TRUE),
+                'Panggilan' => $this->input->post('Panggilan',TRUE),
 			);
             $this->T00_siswa_model->update($this->input->post('idsiswa', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -145,6 +149,7 @@ class T00_siswa extends CI_Controller
     public function _rules()
     {
 		$this->form_validation->set_rules('Nama', 'nama', 'trim|required');
+        $this->form_validation->set_rules('Panggilan', 'panggilan', 'trim|required');
 		$this->form_validation->set_rules('idsiswa', 'idsiswa', 'trim');
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
@@ -170,11 +175,13 @@ class T00_siswa extends CI_Controller
         $kolomhead = 0;
         xlsWriteLabel($tablehead, $kolomhead++, "No");
 		xlsWriteLabel($tablehead, $kolomhead++, "Nama");
+        xlsWriteLabel($tablehead, $kolomhead++, "Panggilan");
 		foreach ($this->T00_siswa_model->get_all() as $data) {
             $kolombody = 0;
             //ubah xlsWriteLabel menjadi xlsWriteNumber untuk kolom numeric
             xlsWriteNumber($tablebody, $kolombody++, $nourut);
 			xlsWriteLabel($tablebody, $kolombody++, $data->Nama);
+            xlsWriteLabel($tablebody, $kolombody++, $data->Panggilan);
 			$tablebody++;
             $nourut++;
         }

@@ -34,6 +34,20 @@
             	<label for="Kdasar">SUB KOMPETENSI DASAR <?php echo form_error('Kdasar') ?></label>
             	<textarea class="form-control" rows="3" name="Kdasar" id="Kdasar" placeholder="KDASAR"><?php echo $Kdasar; ?></textarea>
         	</div>
+            <?php
+            $SiswaNilai = unserialize($SiswaNilai);
+            ?>
+            <div class="form-group">
+                <div class="row">
+                    <?php foreach ($SiswaNilai as $d) { ?>
+                    <div class="col-2">
+                        <label><?php echo $d['Siswa'] ?></label>
+                        <input type="hidden" name="siswa[]" value="<?php echo $d['Siswa'] ?>">
+                        <input type="text" name="nilai[]" value="<?php echo $d['Nilai'] ?>">
+                    </div>
+                    <?php } ?>
+                </div>
+            </div>
 			<input type="hidden" name="idwsheet" value="<?php echo $idwsheet; ?>" />
 			<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 			<a href="<?php echo site_url('t04_wsheet') ?>" class="btn btn-secondary">Batal</a>

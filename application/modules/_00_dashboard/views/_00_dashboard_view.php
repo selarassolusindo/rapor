@@ -101,7 +101,7 @@
                                 switch ($this->uri->segment(1)) {
                                     case 't01_talent':
                                     case 't02_kelompok':
-                                    case 't04_wsheet':
+                                    // case 't04_wsheet':
                                         echo 'menu-open';
                                         break;
                                     default:
@@ -114,7 +114,7 @@
                                     switch ($this->uri->segment(1)) {
                                         case 't01_talent':
                                         case 't02_kelompok':
-                                        case 't04_wsheet':
+                                        // case 't04_wsheet':
                                             echo 'active';
                                             break;
                                         default:
@@ -141,12 +141,12 @@
                                             <p>KELOMPOK <small>MATA PELAJARAN</small></p>
                                         </a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a href="<?php echo site_url() ?>t04_wsheet" class="nav-link <?php echo $this->uri->segment(1) == 't04_wsheet' ? 'active' : ''; ?>">
                                             <i class="far fa-circle nav-icon"></i>
                                             <p>WORKSHEET</p>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </li>
                             <!-- ./setup -->
@@ -159,6 +159,7 @@
                                     case 't30_absensi':
                                     case 't31_talent':
                                     case 't03_mapel':
+                                    case 't04_wsheet':
                                         echo 'menu-open';
                                         break;
                                     default:
@@ -173,6 +174,7 @@
                                         case 't30_absensi':
                                         case 't31_talent':
                                         case 't03_mapel':
+                                        case 't04_wsheet':
                                             echo 'active';
                                             break;
                                         default:
@@ -249,6 +251,7 @@
                                         <?php
                                         switch ($this->uri->segment(1)) {
                                             case 't03_mapel':
+                                            case 't04_wsheet':
                                                 echo 'menu-open';
                                                 break;
                                             default:
@@ -260,6 +263,7 @@
                                             <?php
                                             switch ($this->uri->segment(1)) {
                                                 case 't03_mapel':
+                                                case 't04_wsheet':
                                                     echo 'active';
                                                     break;
                                                 default:
@@ -281,7 +285,7 @@
                                                 </a>
                                             </li>
                                             <li class="nav-item">
-                                                <a href="<?php echo site_url() ?>t04_wsheetx" class="nav-link <?php echo $this->uri->segment(1) == 't04_wsheetx' ? 'active' : ''; ?>">
+                                                <a href="<?php echo site_url() ?>t04_wsheet" class="nav-link <?php echo $this->uri->segment(1) == 't04_wsheet' ? 'active' : ''; ?>">
                                                     <i class="far fa-dot-circle nav-icon"></i>
                                                     <p>WORKSHEET</p>
                                                 </a>

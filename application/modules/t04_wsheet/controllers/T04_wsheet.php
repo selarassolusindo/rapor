@@ -27,7 +27,7 @@ class T04_wsheet extends CI_Controller
             $config['first_url'] = base_url() . 't04_wsheet';
         }
 
-        $config['per_page'] = 10;
+        $config['per_page'] = 1000;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->T04_wsheet_model->total_rows($q);
         $t04_wsheet = $this->T04_wsheet_model->get_limit_data($config['per_page'], $start, $q);
@@ -342,6 +342,7 @@ class T04_wsheet extends CI_Controller
                 'NoUrut' => set_value('NoUrut', $row->NoUrut),
     			'Kdasar' => set_value('Kdasar', $row->Kdasar),
                 'MataPelajaran' => $row->MataPelajaran,
+                'SiswaNilai' => $row->SiswaNilai,
 			);
             // $this->load->view('t04_wsheet/t04_wsheet_form', $data);
             $data['_view'] = 't04_wsheet/t04_wsheet_form_sub';
@@ -364,6 +365,27 @@ class T04_wsheet extends CI_Controller
                     substr('00' . trim($this->input->post('idmapel',TRUE)), -2)
                     . substr('00' . trim($this->input->post('NoUrutRO',TRUE)), -2)
                     . substr('00' . trim($this->input->post('NoUrut',TRUE)), -2),
+			);
+            $this->T04_wsheet_model->update($this->input->post('idwsheet', TRUE), $data);
+
+            /**
+             * baca data dari form
+             */
+            $data = $this->input->post();
+
+            /**
+             * ambil data talent dan nilai
+             */
+            foreach($data['siswa'] as $key => $value) {
+                $SiswaNilai[] = [
+                    'Siswa' => $value,
+                    'Nilai' => $data['nilai'][$key],
+                ];
+            }
+
+            $data = array(
+				// 'idsiswa' => $this->input->post('idsiswa',TRUE),
+				'SiswaNilai' => serialize($SiswaNilai),
 			);
             $this->T04_wsheet_model->update($this->input->post('idwsheet', TRUE), $data);
 
@@ -416,7 +438,7 @@ class T04_wsheet extends CI_Controller
                  */
                 foreach ($siswa as $ds) {
                     $SiswaNilai[] = [
-                        'Siswa' => $ds->Nama,
+                        'Siswa' => $ds->Panggilan,
                         'Nilai' => '',
                     ];
                 }
@@ -443,12 +465,12 @@ class T04_wsheet extends CI_Controller
                     /**
                      * ambil nama siswa
                      */
-                    $nama = $ds->Nama; //echo $nama;
+                    $panggilan = $ds->Panggilan; //echo $nama;
 
                     /**
                      * data nama siswa dicari di array data siswa-nilai
                      */
-                    $key = array_search($nama, array_column($dataSiswaNilai, 'Siswa'), true);
+                    $key = array_search($panggilan, array_column($dataSiswaNilai, 'Siswa'), true);
 
                     /**
                      * jika data nama siswa ditemukan pada siswa-nilai, maka nilai akan disimpan
@@ -462,7 +484,7 @@ class T04_wsheet extends CI_Controller
                      * nilai talent diambil dari data siswa-nilai jika ada
                      */
                     $SiswaNilaiBaru[] = [
-                        'Siswa' => $ds->Nama,
+                        'Siswa' => $ds->Panggilan,
                         'Nilai' => $nilai,
                     ];
                 }

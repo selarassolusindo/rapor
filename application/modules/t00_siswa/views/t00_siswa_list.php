@@ -43,14 +43,19 @@
         </div>
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
-                <th class="text-right">NO.</th>
-				<th>NAMA</th>
-				<th class="text-center">PROSES</th>
+                <th rowspan="2" class="text-right">NO.</th>
+				<th colspan="2">NAMA</th>
+				<th rowspan="2" class="text-center">PROSES</th>
+            </tr>
+            <tr>
+                <th>LENGKAP</th>
+                <th>PANGGILAN</th>
             </tr>
 			<?php foreach ($t00_siswa_data as $t00_siswa) { ?>
             <tr>
 				<td width="80px" class="text-right"><?php echo ++$start ?></td>
 				<td><?php echo $t00_siswa->Nama ?></td>
+                <td><?php echo $t00_siswa->Panggilan ?></td>
 				<td style="text-align:center" width="200px">
 				<?php
 				//echo anchor(site_url('t00_siswa/read/'.$t00_siswa->idsiswa),'Read');

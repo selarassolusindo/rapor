@@ -33,10 +33,8 @@
             	<label for="Kdasar">KOMPETENSI DASAR <?php echo form_error('Kdasar') ?></label>
             	<textarea class="form-control" rows="3" name="Kdasar" id="Kdasar" placeholder="KDASAR"><?php echo $Kdasar; ?></textarea>
         	</div>
-			<!-- <div class="form-group"> -->
-            	<!-- <label for="int">INDUK <?php echo form_error('induk') ?></label> -->
-            	<input type="hidden" name="induk" value="0" />
-        	<!-- </div> -->
+            
+            <input type="hidden" name="induk" value="0" />
 			<input type="hidden" name="idwsheet" value="<?php echo $idwsheet; ?>" />
 			<button type="submit" class="btn btn-primary"><?php echo $button ?></button>
 			<a href="<?php echo site_url('t04_wsheet') ?>" class="btn btn-secondary">Batal</a>

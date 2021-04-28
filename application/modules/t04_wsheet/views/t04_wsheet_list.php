@@ -70,7 +70,7 @@
                     echo '<h6>';
                     echo '<div class="text-center">' . 'WORKSHEET <b>' . $t04_wsheet->MataPelajaran . '</b>' . '</div>';
                     echo '</h6>';
-                    echo '<table class="table table-bordered" style="margin-bottom: 10px">';
+                    echo '<table class="table table-bordered" style="margin-bottom: 10px; white-space: nowrap;">';
                     echo '   <tr>';
                     echo '		<th class="text-center">NO.</th>';
             		echo '		<th class="text-center">KOMPETENSI DASAR</th>';
@@ -105,7 +105,7 @@
                         }
                     }
                     ?>
-    				<td style="text-align:center" width="200px">
+    				<td style="text-align:center">
     				<?php
                     if ($t04_wsheet->induk == '0') {
                         echo anchor(site_url('t04_wsheet/createSub/'.$t04_wsheet->idwsheet),'Tambah');
