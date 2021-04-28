@@ -93,7 +93,7 @@
                 }
             ?>
                 <tr>
-    				<td width="80px" class="text-right"><?php echo $t04_wsheet->induk == '0' ? $t04_wsheet->NoUrut : '' ?></td>
+    				<td class="text-right"><?php echo $t04_wsheet->induk == '0' ? $t04_wsheet->NoUrut : '' ?></td>
                     <td><?php echo formatNama($t04_wsheet) ?></td>
                     <?php
                     if ($t04_wsheet->SiswaNilai != "") {
@@ -127,9 +127,9 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <a href="#" class="btn btn-primary">Total Data : <?php echo $total_rows ?></a>
-				<?php echo anchor(site_url('t04_wsheet/excel'), 'Excel', 'class="btn btn-primary"'); ?>
-				<?php echo anchor(site_url('t04_wsheet/word'), 'Word', 'class="btn btn-primary"'); ?>
+                <!-- <a href="#" class="btn btn-primary">Total Data : <?php echo $total_rows ?></a> -->
+				<!-- <?php echo anchor(site_url('t04_wsheet/excel'), 'Excel', 'class="btn btn-primary"'); ?> -->
+				<!-- <?php echo anchor(site_url('t04_wsheet/word'), 'Word', 'class="btn btn-primary"'); ?> -->
 			</div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>
